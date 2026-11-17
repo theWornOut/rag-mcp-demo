@@ -1,0 +1,35 @@
+:root {
+  --bg: #f6f7f9; --panel: #ffffff; --text: #1c2430; --muted: #667085;
+  --border: #dfe3ea; --accent: #1f4fd8; --c2s: #1f4fd8; --s2c: #0f7a4d;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f141b; --panel: #171e28; --text: #e6eaf0; --muted: #98a2b3;
+    --border: #2a3441; --accent: #6b8cff; --c2s: #6b8cff; --s2c: #4cd39b;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.5 system-ui, sans-serif; }
+header { padding: 16px 24px 8px; }
+header h1 { margin: 0; font-size: 20px; }
+header p { margin: 4px 0 0; color: var(--muted); }
+.controls { display: flex; gap: 8px; padding: 8px 24px; flex-wrap: wrap; align-items: center; }
+button { background: var(--accent); color: #fff; border: 0; border-radius: 8px; padding: 8px 14px; font: inherit; cursor: pointer; }
+button.secondary { background: transparent; color: var(--text); border: 1px solid var(--border); }
+button:disabled { opacity: .4; cursor: default; }
+.caption { color: var(--muted); margin-left: 8px; }
+main { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 8px 24px 24px; }
+@media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+section { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 12px; min-height: 320px; }
+section h2 { margin: 0 0 2px; font-size: 15px; }
+section .sub { margin: 0 0 10px; color: var(--muted); font-size: 13px; }
+.bubble { border-radius: 10px; padding: 8px 12px; margin: 8px 0; white-space: pre-wrap; }
+.bubble.user { background: color-mix(in srgb, var(--accent) 14%, transparent); }
+.bubble.answer { border: 1px solid var(--border); }
+.card { border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px; margin: 8px 0; }
+.card .t { font-weight: 600; font-size: 13px; }
+pre { margin: 6px 0 0; font: 12px/1.4 ui-monospace, monospace; white-space: pre-wrap; word-break: break-word; }
+details { border-left: 3px solid var(--border); padding: 2px 8px; margin: 6px 0; }
+details.c2s { border-color: var(--c2s); }
+details.s2c { border-color: var(--s2c); }
+summary { cursor: pointer; font-size: 13px; }
