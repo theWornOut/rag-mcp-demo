@@ -32,3 +32,32 @@ export async function runScenario(client: Client, emit: Emit): Promise<void> {
       `Kaynak: ${hit.source} > ${hit.section}`,
   });
 }
+
+export const NOTFOUND_QUESTION = 'Vadeden önce kapatırsam ne olur?';
+
+// RAG'ın bulamadığı durumu gösterir. Sonuç gerçek aramadan gelir.
+export async function runNotFoundScenario(client: Client, emit: Emit): Promise<void> {
+  emit({ type: 'user', text: NOTFOUND_QUESTION });
+
+  const args = { query: NOTFOUND_QUESTION, topK: 2 };
+  emit({ type: 'tool_call', name: 'search_policy_docs', args });
+  const text = await callText(client, 'search_policy_docs', args);
+  emit({ type: 'tool_result', name: 'search_policy_docs', text });
+
+  let hits: { source: string; section: string; text: string }[] = [];
+  try {
+    const parsed: unknown = JSON.parse(text);
+    if (Array.isArray(parsed)) hits = parsed;
+  } catch {
+    // "İlgili bölüm bulunamadı." düz metin, JSON değil
+  }
+
+  if (hits.length === 0) {
+    emit({
+      type: 'answer',
+      text: 'Dokümanlarda bu soruyla eşleşen bir bölüm bulamadım. Cevabı tahmin etmek yerine bunu söylüyorum.',
+    });
+  } else {
+    emit({ type: 'answer', text: `${hits[0].text}\nKaynak: ${hits[0].source} > ${hits[0].section}` });
+  }
+}

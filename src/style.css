@@ -33,3 +33,14 @@ details { border-left: 3px solid var(--border); padding: 2px 8px; margin: 6px 0;
 details.c2s { border-color: var(--c2s); }
 details.s2c { border-color: var(--s2c); }
 summary { cursor: pointer; font-size: 13px; }
+.faq { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 4px 24px 8px; }
+@media (max-width: 900px) { .faq { grid-template-columns: 1fr; } }
+.faq .item { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; }
+.faq h3 { margin: 0 0 4px; font-size: 14px; }
+.faq p { margin: 2px 0; font-size: 13px; color: var(--muted); }
+.scenarios { display: flex; gap: 8px; padding: 4px 24px 0; flex-wrap: wrap; }
+button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.narration { margin: 4px 24px 8px; padding: 10px 14px; border-radius: 12px; border: 1px solid var(--border); background: var(--panel); min-height: 48px; }
+.badge { display: inline-block; font-size: 11px; font-weight: 700; border-radius: 6px; padding: 1px 7px; margin-right: 6px; color: #fff; }
+.badge.rag { background: #b45309; }
+.badge.mcp { background: #1f4fd8; }
